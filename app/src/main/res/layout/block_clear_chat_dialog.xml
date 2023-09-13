@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:layout_gravity="center_horizontal"
+    android:layout_margin="20dp"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-black"
+            android:text="Are you sure you want to logout?"
+            android:textColor="@color/black"
+             />
+
+    <TextView
+        android:id="@+id/yes"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="YES"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/no"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="30dp"
+        android:elevation="2dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/white"
+        android:gravity="center"
+        android:text="NO"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+
+</LinearLayout>
