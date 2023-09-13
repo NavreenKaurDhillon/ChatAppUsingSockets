@@ -17,6 +17,7 @@ class SocketManager {
 
     companion object {
 
+        //no of emitter = no of listeners
         /************************** Emitters **************************/
         private const val CONNECT_USER = "connect_user"
         const val CHAT_LISTING = "chat_listing"
@@ -62,7 +63,6 @@ class SocketManager {
         return mSocket
     }
 
-
     fun onRegister(observer: Observer) {
         if (observerList != null && !observerList!!.contains(observer)) {
             observerList!!.clear()
@@ -89,6 +89,7 @@ class SocketManager {
         initializeSocket()
     }
 
+    //initialise socket = connect to the socket and turn on all emitters
     private fun initializeSocket() {
         if (mSocket == null) {
             mSocket = getSocket()
@@ -96,7 +97,6 @@ class SocketManager {
         if (observerList == null || observerList!!.size == 0) {
             observerList = ArrayList()
         }
-
         disconnect()
         mSocket!!.connect()
         mSocket!!.on(Socket.EVENT_CONNECT, onConnect)
@@ -111,11 +111,9 @@ class SocketManager {
         mSocket!!.on(REPORT_USER_LISTENER,reportUserListener)
     }
 
-
-
+    //disconnect = turn off all emitters
     private fun disconnect() {
         if (mSocket != null) {
-
             mSocket!!.off(Socket.EVENT_CONNECT, onConnect)
             mSocket!!.off(Socket.EVENT_DISCONNECT, onDisconnect)
             mSocket!!.off(Socket.EVENT_CONNECT_ERROR, onConnectError)
@@ -207,18 +205,16 @@ class SocketManager {
         }
     }
 
+    //response is of 3 forms - json object, json array, error(error state)
     interface Observer
     {
-        fun onResponseArray(event: String, args: JSONArray)
+        fun onResponseArray(event: String, args: JSONArray) //response - list of json objects (array)
 
-        fun onResponse(event: String, args: JSONObject)
-        fun onError(event: String, vararg args: Array<*>)
+        fun onResponse(event: String, args: JSONObject) //response - one json object
+        fun onError(event: String, vararg args: Array<*>) // error
     }
 
-
-
     //*************************GetChatList************************
-
     fun getChatList(jsonObject: JSONObject?) {
         if (jsonObject != null) {
             try {
@@ -295,7 +291,6 @@ class SocketManager {
     /************************* SEND_MESSAGE ************************/
     //func - send message in the form of json passing required params in it
     fun sendMessage(jsonObject: JSONObject?) {
-
         if (jsonObject != null) {
             try {
                 if (!mSocket!!.connected()) {
@@ -314,9 +309,7 @@ class SocketManager {
         }
     }
 
-
     /************************* GET_CHAT ************************/
-
     //func - check connectivity, and get socket chat
     fun getChat(jsonObject: JSONObject?) {
         if (jsonObject != null) {
@@ -334,7 +327,6 @@ class SocketManager {
             } catch (ex: Exception) {
                 ex.localizedMessage
             }
-
         }
     }
 
@@ -344,7 +336,6 @@ class SocketManager {
         try
         {
             val data = args[0] as JSONArray
-
             for (observer in observerList!!)
             {
                 observer.onResponseArray(GET_CHAT_LISTENER, data)
